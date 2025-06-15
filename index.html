@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stellar Progress Tracker</title>
+    <title>Student Progress Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,10 +12,10 @@
 <body>
     <div id="app">
         <header>
-            <h1>Stellar Progress Tracker</h1>
+            <h1>Student Progress Tracker</h1>
+            <p>Your command center for academic success.</p>
         </header>
 
-        <!-- MODIFIED for PHASE 3 -->
         <main id="app-content">
             <aside class="dashboard">
                 <section class="chart-container card">
@@ -26,23 +26,45 @@
                     </div>
                     <p id="task-stats">0 / 0 tasks completed</p>
                 </section>
+
                 <section class="task-form-container card">
                     <h2>Add New Task</h2>
+                    <!-- MODIFIED for PHASE 4 -->
                     <form id="task-form">
-                        <input type="text" id="task-title" placeholder="What's your next task?" required>
+                        <input type="text" id="task-title" placeholder="Task Title (e.g., Physics Homework)" required>
+                        <textarea id="task-description" placeholder="Description (optional)"></textarea>
+                        <label for="task-due-date">Due Date:</label>
+                        <input type="date" id="task-due-date">
+                        <div class="milestone-check">
+                            <input type="checkbox" id="is-milestone">
+                            <label for="is-milestone">Mark as a Milestone ✨</label>
+                        </div>
                         <button type="submit">Add Task</button>
                     </form>
                 </section>
             </aside>
+            
             <section class="task-area card">
-                <h2>Your Tasks</h2>
+                <!-- MODIFIED for PHASE 4 -->
+                <div class="task-list-header">
+                    <h2>Your Tasks</h2>
+                    <select id="sort-tasks">
+                        <option value="createdAt">Sort by: Newest</option>
+                        <option value="dueDate">Sort by: Due Date</option>
+                    </select>
+                </div>
                 <ul id="task-list"></ul>
             </section>
         </main>
+        
+        <footer>
+            <p>© 2023 - Built with JavaScript, Chart.js, and a dash of stardust.</p>
+        </footer>
     </div>
     
-    <!-- NEW CDN SCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- NEW CDN SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

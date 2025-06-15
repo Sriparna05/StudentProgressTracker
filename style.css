@@ -7,6 +7,7 @@
     --accent-color: #007bff;
     --accent-hover: #0056b3;
     --danger-color: #ff4757;
+    --milestone-glow: 0 0 12px rgba(0, 123, 255, 0.5);
     --font-family: 'Inter', sans-serif;
 }
 
@@ -38,6 +39,10 @@ header h1 {
     color: var(--accent-color);
 }
 
+header p {
+    color: var(--text-light);
+}
+
 .card {
     background-color: var(--card-color);
     border: 1px solid var(--border-color);
@@ -45,7 +50,6 @@ header h1 {
     padding: 1.5rem;
 }
 
-/* NEW & MODIFIED for PHASE 3 Layout */
 #app-content {
     display: grid;
     grid-template-columns: 350px 1fr;
@@ -56,17 +60,6 @@ header h1 {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-}
-
-.task-area {
-    display: flex;
-    flex-direction: column;
-}
-
-#task-list {
-    list-style: none;
-    overflow-y: auto;
-    flex-grow: 1;
 }
 
 .chart-container {
@@ -94,6 +87,7 @@ header h1 {
     margin-top: 1rem;
 }
 
+/* MODIFIED FORM & TASK AREA FOR PHASE 4 */
 #task-form {
     display: flex;
     flex-direction: column;
@@ -101,21 +95,28 @@ header h1 {
 }
 
 #task-form input,
-#task-form button {
+#task-form textarea,
+#task-form button,
+#sort-tasks {
     padding: 0.8rem;
     font-family: var(--font-family);
     border-radius: 5px;
     border: 1px solid var(--border-color);
 }
 
-#task-form input {
+#task-form input,
+#task-form textarea,
+#sort-tasks {
     background-color: var(--bg-color);
     color: var(--text-color);
 }
 
-#task-form input:focus {
+#task-form input:focus,
+#task-form textarea:focus,
+#sort-tasks:focus {
     outline: none;
     border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
 }
 
 #task-form button {
@@ -130,41 +131,119 @@ header h1 {
     background-color: var(--accent-hover);
 }
 
-.task-item {
+.milestone-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.milestone-check input {
+    accent-color: var(--accent-color);
+}
+
+.task-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#sort-tasks {
+    max-width: 180px;
+}
+
+#task-list {
+    list-style: none;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 0.5rem;
+}
+
+.no-tasks-message {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-light);
+}
+
+.task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
-    transition: opacity 0.3s;
+    transition: background-color 0.2s;
+    border-left: 4px solid transparent;
 }
 
-.task-item:last-child {
-    border-bottom: none;
+.task-item.milestone {
+    border-left-color: var(--accent-color);
+    box-shadow: var(--milestone-glow);
 }
 
-.task-item .task-details {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.task-item.overdue {
+    border-left-color: var(--danger-color);
 }
 
 .task-item.completed {
     opacity: 0.5;
 }
 
-.task-item.completed span {
+.task-item.completed .task-title-desc span {
     text-decoration: line-through;
 }
 
 .task-checkbox {
+    margin-top: 5px;
     min-width: 18px;
     height: 18px;
     accent-color: var(--accent-color);
     cursor: pointer;
 }
 
-.btn-delete {
+.task-content {
+    flex-grow: 1;
+}
+
+.task-title-desc p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #2a364d;
+    border: 1px solid #555;
+    color: var(--text-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.task-meta {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+.task-meta .due-date {
+    color: var(--accent-color);
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.task-actions button {
     background: none;
     border: none;
     color: var(--text-light);
@@ -173,12 +252,37 @@ header h1 {
     transition: color 0.2s;
 }
 
-.btn-delete:hover {
+.task-actions .btn-edit:hover,
+.task-actions .btn-save:hover {
+    color: var(--accent-color);
+}
+
+.task-actions .btn-delete:hover {
     color: var(--danger-color);
 }
 
-.no-tasks-message {
+footer {
     text-align: center;
-    padding: 2rem;
-    color: var(--text-light);
+    margin-top: 2rem;
+    color: #444;
+}
+
+@media (max-width: 900px) {
+    body {
+        padding: 1rem;
+    }
+
+    #app-content {
+        grid-template-columns: 1fr;
+    }
+
+    .task-list-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    #sort-tasks {
+        max-width: 100%;
+    }
 }
