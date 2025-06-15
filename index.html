@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Progress Tracker</title>
+    <title>Stellar Progress Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,24 +12,37 @@
 <body>
     <div id="app">
         <header>
-            <h1>Student Progress Tracker</h1>
+            <h1>Stellar Progress Tracker</h1>
         </header>
+
+        <!-- MODIFIED for PHASE 3 -->
         <main id="app-content">
-            <section class="task-form-container card">
-                <h2>Add New Task</h2>
-                <form id="task-form">
-                    <input type="text" id="task-title" placeholder="What's your next task?" required>
-                    <button type="submit">Add Task</button>
-                </form>
-            </section>
+            <aside class="dashboard">
+                <section class="chart-container card">
+                    <h2>Progress Overview</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="progressChart"></canvas>
+                        <div id="progress-text" class="chart-text">0%</div>
+                    </div>
+                    <p id="task-stats">0 / 0 tasks completed</p>
+                </section>
+                <section class="task-form-container card">
+                    <h2>Add New Task</h2>
+                    <form id="task-form">
+                        <input type="text" id="task-title" placeholder="What's your next task?" required>
+                        <button type="submit">Add Task</button>
+                    </form>
+                </section>
+            </aside>
             <section class="task-area card">
                 <h2>Your Tasks</h2>
-                <ul id="task-list">
-                    <!-- Tasks will be injected here -->
-                </ul>
+                <ul id="task-list"></ul>
             </section>
         </main>
     </div>
+    
+    <!-- NEW CDN SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
